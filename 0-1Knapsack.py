@@ -8,6 +8,16 @@ def knapSack(C, W, m, n):
                 dp[i][j]=max(C[i - 1] + dp[i - 1][j- W[i - 1]], dp[i - 1][j])
             else:
                 dp[i][j] = dp[i - 1][j]
+    selected = []
+    i = n
+    j = m
+    while i > 0 and j > 0:
+        if dp[i][j] != dp[i - 1][j]:
+            selected.append(i - 1)
+            j -= W[i - 1]
+        i -= 1
+    selected.reverse()
+    print("Selected items: ", selected)
     return dp[n][m]
     
 if __name__=='__main__':
