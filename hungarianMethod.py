@@ -1,3 +1,28 @@
+"""
+Algorithm:
+hungarian_algorithm(cost_matrix):
+    - Get the dimensions n, m of the cost_matrix.
+    - Check if the cost matrix is square.
+    - Subtract the minimum value of each row from all elements in that row.
+    - Subtract the minimum value of each column from all elements in that column.
+    - Repeat until all zeros in the cost matrix are covered with the minimum number of lines:
+        - Find all uncovered zeros in the cost matrix.
+        - Cover the rows and columns of uncovered zeros.
+        - Update the count of covered lines.
+        - If all zeros are covered, proceed to the next step.
+        - Otherwise, update the cost matrix by subtracting the minimum uncovered value from uncovered elements
+          and adding it to doubly covered elements.
+    - Allocate assignments based on zeros in the cost matrix.
+    - Calculate the total cost based on assigned zeros and original row and column minimums.
+    - Return the optimal assignment and the minimum total cost.
+
+Main code:
+- Define the cost matrix.
+- Call the hungarian_algorithm function with the cost matrix.
+- Print the optimal assignment matrix and the minimum total cost.
+
+"""
+
 import numpy as np
 
 def hungarian_algorithm(cost_matrix):

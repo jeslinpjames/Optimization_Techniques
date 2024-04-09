@@ -1,3 +1,19 @@
+"""
+Algorithm:
+Initialize Variables:
+    Get dimensions of cost_matrix as m and n.
+    Initialize allocation matrix of zeros with dimensions (m, n).
+    Set i and j to 0.
+
+Iterate Over Cost Matrix:
+    While i is less than m and j is less than n:
+        Determine the quantity to allocate as the minimum of supply[i] and demand[j].
+        Allocate this quantity to allocation[i, j].
+        Decrease supply[i] and demand[j] by this quantity.
+        If supply[i] becomes 0, increment i; otherwise, increment j.
+
+Return Allocation Matrix
+"""
 import numpy as np
 
 def northWestCornerCell(cost_matrix,supply,demand):

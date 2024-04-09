@@ -1,3 +1,26 @@
+"""
+Algorithm:
+least_cost_method(supply, demand, costs):
+    m, n = size of supply and demand arrays
+    Initialize allocation matrix of zeros with dimensions (m, n)
+    Initialize total_cost to 0
+
+    while sum of supply array > 0 and sum of demand array > 0:
+        min_cost = infinity
+        min_i, min_j = None, None
+
+        for i in range(m):
+            for j in range(n):
+                if supply[i] > 0 and demand[j] > 0 and costs[i, j] < min_cost:
+                    min_cost = costs[i, j]
+                    min_i, min_j = i, j
+
+        Allocate the minimum of supply[min_i] and demand[min_j] to allocation[min_i, min_j]
+        Update total_cost by adding min_cost * allocation[min_i, min_j]
+        Decrease supply[min_i] and demand[min_j] by the allocated quantity
+
+    Return allocation matrix and total_cost
+"""
 import numpy as np
 
 def least_cost_method(supply, demand, costs):

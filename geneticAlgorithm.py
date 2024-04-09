@@ -1,3 +1,50 @@
+"""
+Algorithm:
+1. Initialize Variables:
+    - numofelems: number of elements in the item list.
+    - items: a list of distinct random numbers from 1 to 15 with numofelems elements.
+    - target_sum: a random integer in the range [1, sum(items)].
+    - population_size: the size of the population.
+    - mutation_probability: the probability of mutation.
+    - generations: the number of generations to run.
+
+2. Define Functions:
+    - generate_population(size): 
+        - Generate a population of size chromosomes.
+        - Each chromosome is a list of random binary values (0 or 1) representing item selection.
+
+    - calculate_fitness(chromosome): 
+        - Calculate the fitness value of a chromosome.
+        - Fitness value is 1 if the subset sum equals the target sum, 0 if it exceeds the target sum, 
+          or the ratio of subset sum to target sum otherwise.
+
+    - select_chromosomes(population):
+        - Select two parent chromosomes based on their fitness values.
+        - Parent selection is based on fitness proportionate selection (roulette wheel selection).
+
+    - crossover(parent1, parent2):
+        - Perform crossover between two parent chromosomes.
+        - Select a random crossover point and exchange the tails of the chromosomes to create two children.
+
+    - mutate(chromosome):
+        - Mutate a chromosome with a certain probability.
+        - Select a random gene (bit) and flip its value.
+
+    - get_best(population):
+        - Get the chromosome with the highest fitness value in the population.
+
+3. Main Loop:
+    - Generate an initial population.
+    - Iterate for a specified number of generations:
+        - Select two parent chromosomes.
+        - Perform crossover to produce two children.
+        - Optionally mutate the children with a certain probability.
+        - Replace the two least fit chromosomes in the population with the children.
+
+4. Print Results:
+    - Print the items matrix, target sum, elements that give the target sum, and their sum.
+
+"""
 import random
 numofelems =   15
 

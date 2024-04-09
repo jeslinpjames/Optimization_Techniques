@@ -1,3 +1,45 @@
+"""
+Algorithm:
+1. Initialize Variables:
+    - Initialize the grid with the given values.
+    - Initialize supply and demand arrays.
+    - Define a constant, INF, representing infinity.
+    - Determine the dimensions of the grid.
+    - Initialize ans (total cost) to 0.
+
+2. Define Helper Function:
+    - Define a function, findDiff(grid), to find row and column differences:
+        - Initialize empty arrays rowDiff and colDiff.
+        - Iterate over each row to find row differences and append to rowDiff.
+        - Iterate over each column to find column differences and append to colDiff.
+        - Return rowDiff and colDiff.
+
+3. Main Loop:
+    - Iterate until either supply or demand is exhausted (max(supply) == 0 or max(demand) == 0):
+        - Find row and column differences using findDiff function.
+        - Determine the maximum element in row and column differences.
+        - If row difference max is greater than or equal to column difference max:
+            - Iterate over rows:
+                - Find the minimum element in the row.
+                - Find the corresponding column index with the minimum element.
+                - Calculate the quantity to allocate (min of supply and demand).
+                - Update ans by adding quantity * minimum element.
+                - Update supply and demand by subtracting the allocated quantity.
+                - If demand becomes 0, mark the entire column as INF.
+                - If supply becomes 0, mark the entire row as INF.
+        - If column difference max is greater than row difference max:
+            - Iterate over columns:
+                - Find the minimum element in the column.
+                - Find the corresponding row index with the minimum element.
+                - Calculate the quantity to allocate (min of supply and demand).
+                - Update ans by adding quantity * minimum element.
+                - Update supply and demand by subtracting the allocated quantity.
+                - If demand becomes 0, mark the entire column as INF.
+                - If supply becomes 0, mark the entire row as INF.
+
+4. Print the Result:
+    - Print the total cost, ans.
+"""
 grid = [
 	[3, 1, 7, 4],
     [2, 6, 5, 9],
