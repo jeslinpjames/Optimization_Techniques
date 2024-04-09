@@ -1,0 +1,75 @@
+def minCost(arr):
+    # Convert the input matrix to a square matrix if necessary
+    n = max(len(arr), len(arr[0]))
+    for i in range(len(arr), n):
+        arr.append([float('inf')] * n)
+    for i in range(len(arr[0]), n):
+        for j in range(n):
+            arr[j].append(float('inf'))
+
+    # Step 1: Subtract the minimum value in each row from every element in that row
+    for i in range(n):
+        min_val = min(arr[i])
+        for j in range(n):
+            arr[i][j] -= min_val
+
+    # Step 2: Subtract the minimum value in each column from every element in that column
+    for j in range(n):
+        min_val = min(arr[i][j] for i in range(n))
+        for i in range(n):
+            arr[i][j] -= min_val
+
+    # Step 3: Cover all zeros in the matrix using the minimum number of lines
+    row_covered = [False] * n
+    col_covered = [False] * n
+    num_covered = 0
+
+    while num_covered < n:
+        # Find an uncovered zero
+        zero_found = False
+        for i in range(n):
+            if row_covered[i]:
+                continue
+            for j in range(n):
+                if not col_covered[j] and arr[i][j] == 0:
+                    row_covered[i] = True
+                    col_covered[j] = True
+                    zero_found = True
+                    num_covered += 1
+                    break
+            if zero_found:
+                break
+
+        if not zero_found:
+            # If no uncovered zero is found, find the minimum uncovered value
+            min_uncovered = float('inf')
+            for i in range(n):
+                if row_covered[i]:
+                    continue
+                for j in range(n):
+                    if not col_covered[j]:
+                        min_uncovered = min(min_uncovered, arr[i][j])
+
+            # Subtract the minimum uncovered value from all uncovered values, and add it to all doubly covered values
+            for i in range(n):
+                for j in range(n):
+                    if row_covered[i] and col_covered[j]:
+                        arr[i][j] += min_uncovered
+                    elif not row_covered[i] and not col_covered[j]:
+                        arr[i][j] -= min_uncovered
+
+            # Uncover all rows and columns
+            row_covered = [False] * n
+            col_covered = [False] * n
+            num_covered = 0
+
+    # Calculate the minimum cost
+    min_cost = sum(arr[i][j] for i in range(n) for j in range(n) if arr[i][j] != float('inf'))
+    print(min_cost)
+
+# Driver Code
+# Given 2D array
+arr = [[3, 5], [10, 1]]
+
+# Function Call
+minCost(arr)
